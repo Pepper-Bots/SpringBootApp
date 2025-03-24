@@ -9,3 +9,7 @@
 Java - Spring Boot
 Bootstrap / Angular
 
+- Création d'un conteneur Docker
+- Initialisation des tests d'intégration continue
+
+
