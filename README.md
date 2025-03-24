@@ -1,8 +1,9 @@
 # SpringBootApp
 
-## Projet d'une application de commandes 
+## Projet d'une application de gestion des commandes 
 
-- Projet dans le cadre de ma formation de concepteur développeur d'applications
+- Projet dans le cadre de ma formation de concepteur développeur d'applications.
+- Cours Java & Spring + Docker
 
 ### Stack
 
