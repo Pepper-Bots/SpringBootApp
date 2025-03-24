@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<ul id="ma-liste">
+
+</ul>
+
+<form onsubmit="return onNewProduct();">
+
+    <input id="champs-nom" value="Votre nom">
+    <input id="champs-code">
+    <textarea id="champs-description"></textarea>
+    <input id="champs-prix">
+    <input type="submit" value="Envoyer">
+
+</form>
+<form onsubmit="return onSearchProduct();">
+    <input id="champs-search-product" type="number">
+    <input type="submit" value="Rechercher">
+
+</form>
+<ul id="ma-liste1">
+
+</ul>
+</body>
+
+<script>
+    function onNewProduct() {
+        const product = {
+            nom: document.getElementById("champs-nom").value,
+            code: document.getElementById("champs-code").value,
+            description: document.getElementById("champs-description").value,
+            prix: document.getElementById("champs-prix").value,
+        }
+
+        const jsonProduct = JSON.stringify(product);
+        console.table(product);
+
+        fetch("http://localhost:8080/product", {
+            method: "POST",
+            body: jsonProduct,
+            headers: {"Content-Type": "application/json"}
+        })
+            .then(resultat => console.log("fini"))
+
+        return false;
+    }
+
+    console.log("DEBUT");
+
+    fetch("http://localhost:8080/products")
+        .then(resultat => resultat.json())
+        .then(listProduct => {
+            const maListe = document.getElementById("ma-liste");
+
+            for (let product of listProduct) {
+                const elementListe = document.createElement("li");
+                elementListe.innerHTML = product.nom + " " + product.prix;
+                maListe.append(elementListe);
+            }
+        })
+
+    function onSearchProduct(e) {
+
+        const id = e.target.value;
+
+        fetch(`http://localhost:8080/product/${id}`)
+            .then(resultat => resultat.json())
+            .then(listProduct => {
+                console.log(listProduct);
+                const maListe = document.getElementById("ma-liste1");
+
+                listProduct
+                    .forEach(element => {
+                            const elementListe = document.createElement("li");
+                            elementListe.innerHTML = element.nom + " " + element.prix;
+                            maListe.append(elementListe);
+                        }
+                    )
+            })
+        return false;
+
+    }
+
+    console.log("FIN")
+</script>
+
+</html>
