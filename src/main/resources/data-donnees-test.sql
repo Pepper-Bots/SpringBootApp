@@ -1,3 +1,16 @@
+INSERT INTO utilisateur(email, password)
+VALUES ("a@a.com", "$2a$10$7m/yHcKoja46YkOngGNUfO8eqJpRsd4edZm3NE6LabpBzTkYMOnhm"),
+       ("b@b.com", "$2a$10$7m/yHcKoja46YkOngGNUfO8eqJpRsd4edZm3NE6LabpBzTkYMOnhm"),
+       ("c@c.com", "$2a$10$7m/yHcKoja46YkOngGNUfO8eqJpRsd4edZm3NE6LabpBzTkYMOnhm");
+
+
+INSERT INTO vendeur(id, salaire, chef)
+VALUES (1, 2000, 0),
+       (3, 3000, 1);
+
+INSERT INTO client(id, numero)
+VALUES (2, "EZ1FD53EZF1");
+
 INSERT INTO etat (id, nom)
 VALUES (1, 'neuf'),
        (2, 'occasion'),
@@ -5,12 +18,12 @@ VALUES (1, 'neuf'),
        (4, 'reconditionné'),
        (5, 'très bon état');
 
-INSERT INTO etiquette (id, nom)
-VALUES (1, 'Promo'),
-       (2, 'Soldes'),
-       (3, 'Déstockage'),
-       (4, 'Fin de série'),
-       (5, 'Dernière chance');
+INSERT INTO etiquette (id, nom, couleur)
+VALUES (1, 'Promo', '#77FF77'),
+       (2, 'Soldes', 'red'),
+       (3, 'Déstockage', 'grey'),
+       (4, 'Fin de série', 'yellow'),
+       (5, 'Dernière chance', 'darkred');
 
 
 INSERT INTO product (id, nom, code_article, description, prix, etat_id)

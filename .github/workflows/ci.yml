@@ -1,7 +1,7 @@
 name: My Super App Continuous Integration
 
 run-name: Job started by ${{ github.actor }}
-on: [ push ]
+on: [push]
 jobs:
   Maven-Test:
     runs-on: ubuntu-latest
@@ -10,14 +10,7 @@ jobs:
       - name: Setup Java
         uses: actions/setup-java@v4
         with:
-          distribution: 'temurin'
-          java-version: '21'
+          distribution: "temurin"
+          java-version: "21"
       - name: run tests
         run: mvn clean test
-      - name: Publish Test Results
-        uses: EnricoMi/publish-unit-test-result-action@v2
-        if: always()
-        with:
-          files: |
-            target/surefire-reports/**/*.xml
-      - name: Update dependency graph

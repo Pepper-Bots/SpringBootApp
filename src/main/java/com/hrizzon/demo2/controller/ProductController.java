@@ -1,7 +1,10 @@
 package com.hrizzon.demo2.controller;
 
 import com.hrizzon.demo2.dao.ProductDao;
+import com.hrizzon.demo2.model.Etat;
 import com.hrizzon.demo2.model.Product;
+import com.hrizzon.demo2.security.IsClient;
+import com.hrizzon.demo2.security.IsVendeur;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,6 +16,7 @@ import java.util.Optional;
 
 @CrossOrigin
 @RestController
+@IsVendeur
 public class ProductController {
 
 //    @Autowired
@@ -26,6 +30,7 @@ public class ProductController {
     }
 
     @GetMapping("/product/{id}")
+//    @IsAdmin
     public ResponseEntity<Product> get(@PathVariable int id) {
 
         Optional<Product> optionalProduct = productDao.findById(id);
@@ -37,6 +42,7 @@ public class ProductController {
     }
 
     @GetMapping("/products")
+    @IsVendeur
     public List<Product> getAll() {
 
 
@@ -46,12 +52,21 @@ public class ProductController {
     @PostMapping("/product")
     public ResponseEntity<Product> save(@RequestBody @Valid Product product) {
 
-        productDao.save(product);
+        // Si le produit reçu n'a pas d'état alors on indique qu'il est neuf par défaut
+        if (product.getEtat() == null) {
 
+            Etat etatNeuf = new Etat();
+            etatNeuf.setId(1);
+            product.setEtat(etatNeuf);
+        }
+
+        product.setId(null);
+        productDao.save(product);
         return new ResponseEntity<>(product, HttpStatus.CREATED);
     }
 
     @DeleteMapping("/product/{id}")
+    @IsClient
     public ResponseEntity<Product> delete(@PathVariable int id) {
 
         Optional<Product> optionalProduct = productDao.findById(id);
