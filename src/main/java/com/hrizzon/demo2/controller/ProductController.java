@@ -5,9 +5,9 @@ import com.hrizzon.demo2.model.Etat;
 import com.hrizzon.demo2.model.Product;
 import com.hrizzon.demo2.model.Vendeur;
 import com.hrizzon.demo2.security.AppUserDetails;
+import com.hrizzon.demo2.security.ISecuriteUtils;
 import com.hrizzon.demo2.security.IsClient;
 import com.hrizzon.demo2.security.IsVendeur;
-import com.hrizzon.demo2.security.SecuriteUtils;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,16 +20,17 @@ import java.util.Optional;
 
 @CrossOrigin
 @RestController
+@IsVendeur
 public class ProductController {
 
 //    @Autowired
 //    protected ProductDao productDao;
 
     protected ProductDao productDao;
-    protected SecuriteUtils securiteUtils;
+    protected ISecuriteUtils securiteUtils;
 
     @Autowired
-    public ProductController(ProductDao productDao, SecuriteUtils securiteUtils) {
+    public ProductController(ProductDao productDao, ISecuriteUtils securiteUtils) {
         this.productDao = productDao;
         this.securiteUtils = securiteUtils;
     }
@@ -48,8 +49,10 @@ public class ProductController {
     }
 
     @GetMapping("/products")
-    @IsClient
+    @IsVendeur
     public List<Product> getAll() {
+
+
         return productDao.findAll();
     }
 
@@ -115,7 +118,6 @@ public class ProductController {
     }
 
     @PutMapping("/product/{id}")
-    @IsVendeur
     public ResponseEntity<Product> update(
             @PathVariable int id,
             @RequestBody @Valid Product product) {
