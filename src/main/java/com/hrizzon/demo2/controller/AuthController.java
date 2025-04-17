@@ -3,7 +3,7 @@ package com.hrizzon.demo2.controller;
 import com.hrizzon.demo2.dao.UtilisateurDao;
 import com.hrizzon.demo2.model.Utilisateur;
 import com.hrizzon.demo2.security.AppUserDetails;
-import com.hrizzon.demo2.security.JwUtils;
+import com.hrizzon.demo2.security.ISecuriteUtils;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,14 +24,14 @@ public class AuthController {
     protected UtilisateurDao utilisateurDao;
     protected PasswordEncoder passwordEncoder; // Va être changé à un seul endroit -> dans le DemoApplication
     protected AuthenticationProvider authenticationProvider;
-    protected JwUtils jwUtils;
+    protected ISecuriteUtils securiteUtils;
 
     @Autowired
-    public AuthController(UtilisateurDao utilisateurDao, PasswordEncoder passwordEncoder, AuthenticationProvider authenticationProvider, JwUtils jwUtils) {
+    public AuthController(UtilisateurDao utilisateurDao, PasswordEncoder passwordEncoder, AuthenticationProvider authenticationProvider, ISecuriteUtils securiteUtils) {
         this.utilisateurDao = utilisateurDao;
         this.passwordEncoder = passwordEncoder; // Autowire d'un passwordEncoder
         this.authenticationProvider = authenticationProvider;
-        this.jwUtils = jwUtils;
+        this.securiteUtils = securiteUtils;
     }
 
     // Méthode d'inscription d'un utilisateur
@@ -57,7 +57,7 @@ public class AuthController {
                                     utilisateur.getPassword()))
                     .getPrincipal();
 
-            return new ResponseEntity<>(jwUtils.generateToken(userDetails), HttpStatus.OK);
+            return new ResponseEntity<>(securiteUtils.generateToken(userDetails), HttpStatus.OK);
 
         } catch (AuthenticationException e) {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);

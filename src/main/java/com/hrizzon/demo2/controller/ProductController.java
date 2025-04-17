@@ -3,6 +3,7 @@ package com.hrizzon.demo2.controller;
 import com.hrizzon.demo2.dao.ProductDao;
 import com.hrizzon.demo2.model.Etat;
 import com.hrizzon.demo2.model.Product;
+import com.hrizzon.demo2.security.ISecuriteUtils;
 import com.hrizzon.demo2.security.IsClient;
 import com.hrizzon.demo2.security.IsVendeur;
 import jakarta.validation.Valid;
@@ -23,10 +24,12 @@ public class ProductController {
 //    protected ProductDao productDao;
 
     protected ProductDao productDao;
+    protected ISecuriteUtils securiteUtils;
 
     @Autowired
-    public ProductController(ProductDao productDao) {
+    public ProductController(ProductDao productDao, ISecuriteUtils securiteUtils) {
         this.productDao = productDao;
+        this.securiteUtils = securiteUtils;
     }
 
     @GetMapping("/product/{id}")
