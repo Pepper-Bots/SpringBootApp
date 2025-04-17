@@ -10,7 +10,7 @@ import java.lang.annotation.Target;
 @Target({ElementType.METHOD, ElementType.TYPE})
 // @Target = savoir sur quoi je peux mettre cette annotation -> au dessus d'une méthode ou d'une classe
 @Retention(RetentionPolicy.RUNTIME)
-@PreAuthorize("hasAnyRole('ROLE_VENDEUR', 'ROLE_CHEF_DE_RAYON')")
+@PreAuthorize("hasAnyRole('ROLE_VENDEUR', 'ROLE_CHEF_RAYON')")
 //> peut avoir n'importe quel rôle utilisateur ou admin pour avoir accès à la requête
 //@PreAuthorized -> filtre -> va générer du code en fonction des annotations (comme une étiquette)
 public @interface IsVendeur {
