@@ -6,7 +6,8 @@ import com.hrizzon.demo2.security.ISecuriteUtils;
 public class MockSecuriteUtils implements ISecuriteUtils {
     @Override
     public String getRole(AppUserDetails userDetails) {
-        return "";
+
+        return "VENDEUR";
     }
 
     @Override
