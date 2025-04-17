@@ -2,6 +2,7 @@ package com.hrizzon.demo2.mock;
 
 import com.hrizzon.demo2.dao.ProductDao;
 import com.hrizzon.demo2.model.Product;
+import com.hrizzon.demo2.model.Vendeur;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -12,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
 
-public class MockProducttDao implements ProductDao {
+public class MockProductDao implements ProductDao {
 
 
     @Override
@@ -107,6 +108,13 @@ public class MockProducttDao implements ProductDao {
 
     @Override
     public Optional<Product> findById(Integer integer) {
+
+        Vendeur fauxVendeur = new Vendeur();
+        fauxVendeur.setId(1);
+
+        Product fauxProduct = new Product();
+        fauxProduct.setId(integer);
+        fauxProduct.setCreateur(fauxVendeur);
 
         if (integer == 1) {
             return Optional.of(new Product());
