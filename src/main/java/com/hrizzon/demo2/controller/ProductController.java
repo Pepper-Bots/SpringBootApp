@@ -64,6 +64,7 @@ public class ProductController {
 
         product.setCreateur((Vendeur) userDetails.getUtilisateur());
 
+
         // Dans le cas d'un enum
         // product.setCreateur(userDetails.getUtilisateur());
         // Si le produit reçu n'a pas d'état alors on indique qu'il est neuf par défaut
@@ -120,7 +121,7 @@ public class ProductController {
     @PutMapping("/product/{id}")
     public ResponseEntity<Product> update(
             @PathVariable int id,
-            @RequestBody @Valid Product product) {
+            @RequestBody @Valid Product produitAsauvegarder) {
 
         Optional<Product> optionalProduct = productDao.findById(id);
 
@@ -128,10 +129,14 @@ public class ProductController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
-        product.setId(id);
+        // Etant donné que le formulaire d'édition de product ne permet pas de modifier le vendeur du product,
+        // On récupère l'ancien créateur et on le réaffecte au product à sauvegarder
+        produitAsauvegarder.setCreateur(optionalProduct.get().getCreateur());
 
-        productDao.save(product);
+        produitAsauvegarder.setId(id);
 
-        return new ResponseEntity<>(product, HttpStatus.NO_CONTENT);
+        productDao.save(produitAsauvegarder);
+
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
