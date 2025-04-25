@@ -20,7 +20,6 @@ import java.util.Optional;
 
 @CrossOrigin
 @RestController
-@IsVendeur
 public class ProductController {
 
 //    @Autowired
@@ -49,7 +48,7 @@ public class ProductController {
     }
 
     @GetMapping("/products")
-    @IsVendeur
+    @IsClient
     public List<Product> getAll() {
 
 
@@ -119,6 +118,7 @@ public class ProductController {
     }
 
     @PutMapping("/product/{id}")
+    @IsVendeur
     public ResponseEntity<Product> update(
             @PathVariable int id,
             @RequestBody @Valid Product produitAsauvegarder) {

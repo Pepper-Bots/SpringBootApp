@@ -27,11 +27,10 @@ public class SecuriteUtils implements ISecuriteUtils {
 
         return Jwts.builder()
                 .setSubject(userDetails.getUsername())
-                .addClaims(Map.of("role", getRole(userDetails)))
+                .addClaims(Map.of("role", getRole(userDetails))) // on ajoute une revendication - implantation la + classique qu'on peut faire d'un Json
                 .signWith(SignatureAlgorithm.HS256, jwtSecret)
 //                .setExpiration(new Date(System.currentTimeMillis() + (24 * 60 * 60 * 1000))) // Permet de donner une expiration à la connexion
                 .compact();
-
     }
 
     @Override
