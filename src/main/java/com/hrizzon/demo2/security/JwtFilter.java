@@ -18,12 +18,12 @@ import java.io.IOException;
 @Component
 public class JwtFilter extends OncePerRequestFilter {
 
-    protected JwUtils jwUtils;
+    protected ISecurityUtils securityUtils;
     protected UserDetailsService userDetailsService;
 
     @Autowired
-    public JwtFilter(JwUtils jwUtils, UserDetailsService userDetailsService) {
-        this.jwUtils = jwUtils;
+    public JwtFilter(JwUtils securityUtlis, UserDetailsService userDetailsService) {
+        this.securityUtlis = securityUtlis;
         this.userDetailsService = userDetailsService;
     }
 
@@ -37,7 +37,7 @@ public class JwtFilter extends OncePerRequestFilter {
 
             String jwt = token.substring(7);
 
-            String subject = jwUtils.getSubjectFromJwt(jwt);
+            String subject = securityUtlis.getSubjectFromJwt(jwt);
 
             UserDetails userDetails = userDetailsService.loadUserByUsername(subject);
 
