@@ -76,4 +76,10 @@ VALUES (NOW());
 INSERT INTO ligne_commande (commande_id, quantite, prix_vente, product_id)
 VALUES (1, 2, 1500, 4);
 
+INSERT INTO type_promotion (nom, pourcentage)
+VALUES ('solde', 1);
+
+INSERT INTO promotion (product_id, type_promotion_id, valeur)
+VALUES (2, 1, 20);
+
 
