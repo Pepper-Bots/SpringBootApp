@@ -19,7 +19,7 @@ public class ProductControllerTest {
     @BeforeEach
     void setUp() {
         productController = new ProductController(
-                new MockProductDao(), new MockSecuriteUtils()
+                new MockProductDao(), new MockSecuriteUtils("ROLE_VENDEUR"), null
         );
     }
 
@@ -47,7 +47,7 @@ public class ProductControllerTest {
     @Test
     void deleteExistingProductBySellerOwner_shouldSend204noContent() {
         ProductController productController = new ProductController(
-                new MockProductDao(), new MockSecuriteUtils()
+                new MockProductDao(), new MockSecuriteUtils("ROLE_CHEF_RAYON"), null
         );
 
         Vendeur fauxVendeur = new Vendeur();

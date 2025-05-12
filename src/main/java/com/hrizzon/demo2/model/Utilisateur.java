@@ -1,11 +1,15 @@
 package com.hrizzon.demo2.model;
 
-import com.hrizzon.demo2.security.Role;
+import com.fasterxml.jackson.annotation.JsonView;
+import com.hrizzon.demo2.view.AffichageUtilisateur;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.List;
+
 
 @Getter
 @Setter
@@ -15,6 +19,7 @@ public class Utilisateur {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonView(AffichageUtilisateur.class)
     protected Integer id;
 
     @NotBlank
@@ -26,8 +31,7 @@ public class Utilisateur {
     @Column(nullable = false)
     protected String password;
 
-    //    protected boolean admin; // -> dans l'optique de n'avoir à gérer que 2 rôles : ADMIN & USER
-//    @Enumerated(EnumType.STRING)
-//    @Column(columnDefinition = "ENUM('USER','REDACTEUR','ADMIN')")
-//    protected Role role;
+    @OneToMany(mappedBy = "destinataire", fetch = FetchType.LAZY)
+    protected List<Notification> notifications;
+
 }

@@ -8,12 +8,14 @@ import com.hrizzon.demo2.security.AppUserDetails;
 import com.hrizzon.demo2.security.ISecuriteUtils;
 import com.hrizzon.demo2.security.IsClient;
 import com.hrizzon.demo2.security.IsVendeur;
+import com.hrizzon.demo2.service.FichierService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Optional;
@@ -27,11 +29,13 @@ public class ProductController {
 
     protected ProductDao productDao;
     protected ISecuriteUtils securiteUtils;
+    protected FichierService fichierService;
 
     @Autowired
-    public ProductController(ProductDao productDao, ISecuriteUtils securiteUtils) {
+    public ProductController(ProductDao productDao, ISecuriteUtils securiteUtils, FichierService fichierService) {
         this.productDao = productDao;
         this.securiteUtils = securiteUtils;
+        this.fichierService = fichierService;
     }
 
     @GetMapping("/product/{id}")
@@ -58,9 +62,13 @@ public class ProductController {
     @PostMapping("/product")
     @IsVendeur
     public ResponseEntity<Product> save(
-            @RequestBody @Valid Product product,
+            @RequestPart("product") @Valid Product product,
+            @RequestPart(value = "photo", required = false) MultipartFile photo,
             @AuthenticationPrincipal AppUserDetails userDetails) { // On récupère toutes les infos de la personne qui est connectée
 
+        userDetails = null;
+
+        // Dans le cas d'un héritage
         product.setCreateur((Vendeur) userDetails.getUtilisateur());
 
 
@@ -76,6 +84,22 @@ public class ProductController {
 
         product.setId(null);
         productDao.save(product);
+//        return new ResponseEntity<>(product, HttpStatus.CREATED);
+
+        if (photo != null) {
+
+            try {
+                fichierService.uploadToLocalFileSystem(photo, "toto.jpg");
+            } catch (Exception e) {
+                e.printStackTrace();
+                return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+
+
+        }
+
+        product.setCreateur(null);
+
         return new ResponseEntity<>(product, HttpStatus.CREATED);
     }
 

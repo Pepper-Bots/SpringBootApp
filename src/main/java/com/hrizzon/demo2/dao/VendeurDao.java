@@ -12,4 +12,5 @@ import java.util.Optional;
 @Repository  // > fait un truc en plus
 public interface VendeurDao extends JpaRepository<Vendeur, Integer> {
     Optional<Vendeur> findByEmail(String email);
+
 }
