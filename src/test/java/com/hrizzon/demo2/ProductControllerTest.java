@@ -26,7 +26,7 @@ public class ProductControllerTest {
     @Test
     void callGetWithExistingProduct_shouldSend200ok() {
         ProductController productController = new ProductController(
-                new MockProductDao(), new MockSecuriteUtils()
+                new MockProductDao(), new MockSecuriteUtils("ROLE_VENDEUR"), null
         );
 
         ResponseEntity<Product> response = productController.get(1);
@@ -36,7 +36,7 @@ public class ProductControllerTest {
     @Test
     void callGetWithExistingProduct_shouldSend404notFound() {
         ProductController productController = new ProductController(
-                new MockProductDao(), new MockSecuriteUtils()
+                new MockProductDao(), new MockSecuriteUtils("ROLE_VENDEUR"), null
         );
 
         ResponseEntity<Product> response = productController.get(1);

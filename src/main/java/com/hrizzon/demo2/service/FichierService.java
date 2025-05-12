@@ -17,13 +17,16 @@ public class FichierService {
     @Value("${public.upload.folder}")
     private String publicUploadFolder;
 
-    public void uploadToLocalFileSystem(MultipartFile fichier, String fileName) throws IOException {
-        uploadToLocalFileSystem(fichier.getInputStream(), fileName);
+    @Value("${private.upload.folder}")
+    private String privateUploadFolder;
+
+    public void uploadToLocalFileSystem(MultipartFile fichier, String fileName, boolean publicFile) throws IOException {
+        uploadToLocalFileSystem(fichier.getInputStream(), fileName, publicFile);
     }
 
-    public void uploadToLocalFileSystem(InputStream inputStream, String fileName) throws IOException {
+    public void uploadToLocalFileSystem(InputStream inputStream, String fileName, boolean publicFile) throws IOException {
 
-        Path storageDirectory = Paths.get(publicUploadFolder);
+        Path storageDirectory = Paths.get(publicFile ? publicUploadFolder : privateUploadFolder);
 
         if (!Files.exists(storageDirectory)) {
             try {
