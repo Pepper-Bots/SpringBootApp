@@ -80,6 +80,6 @@ public class Product {
     Vendeur createur; // Le vendeur qui a créé ce produit. On peut imaginer qu'il existe une classe 'Vendeur' annotée avec '@Entity' représentant les informations des vendeurs.
 
     @JsonView({AffichageProductPourClient.class})
-    String monImage;
+    String nomImage;
 
 }

@@ -1,9 +1,11 @@
 package com.hrizzon.demo2.service;
 
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
@@ -39,6 +41,18 @@ public class FichierService {
         Path destination = Paths.get(storageDirectory.toString() + "/" + fileName);
 
         Files.copy(inputStream, destination, StandardCopyOption.REPLACE_EXISTING);
+
+    }
+
+    public byte[] getImageByName(String nomImage) throws FileNotFoundException {
+
+        Path destination = Paths.get(privateUploadFolder + "/" + nomImage);// retrieve the image by its name
+
+        try {
+            return IOUtils.toByteArray(destination.toUri());
+        } catch (IOException e) {
+            throw new FileNotFoundException(e.getMessage());
+        }
 
     }
 }

@@ -101,7 +101,7 @@ public class ProductController {
                 String imageName = date + "_" + product.getNom() + "_" + UUID.randomUUID() + "_" + photo.getOriginalFilename();
                 fichierService.uploadToLocalFileSystem(photo, imageName, false);
 
-                product.setMonImage(imageName);
+                product.setNomImage(imageName);
 
             } catch (Exception e) {
                 return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
