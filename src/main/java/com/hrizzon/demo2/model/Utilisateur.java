@@ -15,23 +15,37 @@ import java.util.List;
 @Setter
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
+@DiscriminatorColumn(name = "nom_role", discriminatorType = DiscriminatorType.STRING)
 public class Utilisateur {
+
+    public interface ValidInscription {
+    }
+
+    public interface ValidModification {
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonView(AffichageUtilisateur.class)
     protected Integer id;
 
-    @NotBlank
+    @NotBlank(groups = {ValidInscription.class})
     @Email
     @Column(unique = true, nullable = false)
     protected String email;
 
-    @NotBlank
+    @NotBlank(groups = {ValidInscription.class})
     @Column(nullable = false)
     protected String password;
 
     @OneToMany(mappedBy = "destinataire", fetch = FetchType.LAZY)
     protected List<Notification> notifications;
+
+    protected String jetonVerificationEmail;
+
+    @Column(name = "nom_role", insertable = false, updatable = false)
+    protected String nomRole;
+    // TODO 0 à terminer
+
 
 }

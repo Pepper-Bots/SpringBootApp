@@ -1,7 +1,8 @@
-INSERT INTO utilisateur(email, password)
-VALUES ("a@a.com", "$2a$10$7m/yHcKoja46YkOngGNUfO8eqJpRsd4edZm3NE6LabpBzTkYMOnhm"),
-       ("b@b.com", "$2a$10$7m/yHcKoja46YkOngGNUfO8eqJpRsd4edZm3NE6LabpBzTkYMOnhm"),
-       ("c@c.com", "$2a$10$7m/yHcKoja46YkOngGNUfO8eqJpRsd4edZm3NE6LabpBzTkYMOnhm");
+INSERT INTO utilisateur(email, password, nom_role)
+VALUES ("a@a.com", "$2a$10$7m/yHcKoja46YkOngGNUfO8eqJpRsd4edZm3NE6LabpBzTkYMOnhm", 'VENDEUR'),
+       ("b@b.com", "$2a$10$7m/yHcKoja46YkOngGNUfO8eqJpRsd4edZm3NE6LabpBzTkYMOnhm", 'CLIENT'),
+       ("c@c.com", "$2a$10$7m/yHcKoja46YkOngGNUfO8eqJpRsd4edZm3NE6LabpBzTkYMOnhm", 'VENDEUR'),
+       ("d@d.com", "$2a$10$7m/yHcKoja46YkOngGNUfO8eqJpRsd4edZm3NE6LabpBzTkYMOnhm", 'VENDEUR');
 
 
 INSERT INTO vendeur(id, salaire, chef)

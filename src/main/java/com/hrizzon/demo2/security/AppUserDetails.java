@@ -33,9 +33,6 @@ public class AppUserDetails implements UserDetails {
             return List.of(new SimpleGrantedAuthority("ROLE_" + (vendeur.isChef() ? "CHEF_RAYON" : "VENDEUR")));
         }
 
-//        return List.of(new SimpleGrantedAuthority(
-////                "ROLE_" + utilisateur.getRole().name()));
-//                isClient ? "ROLE_CLIENT" : "ROLE_VENDEUR"));
     }
 
     @Override
@@ -46,5 +43,10 @@ public class AppUserDetails implements UserDetails {
     @Override
     public String getUsername() {
         return utilisateur.getEmail();
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return utilisateur.getJetonVerificationEmail() == null;
     }
 }
