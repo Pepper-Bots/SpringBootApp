@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class EmailService {
 
+    // FIXME  -> pourquoi pas de constructeur pour JavaMailSender ?
+
     @Autowired
     private JavaMailSender mailSender;
 

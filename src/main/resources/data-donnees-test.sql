@@ -1,16 +1,16 @@
 INSERT INTO utilisateur(email, password, nom_role)
-VALUES ('a@a.com', '$2a$10$7m/yHcKoja46YkOngGNUfO8eqJpRsd4edZm3NE6LabpBzTkYMOnhm', 'VENDEUR'),
-       ('b@b.com', '$2a$10$7m/yHcKoja46YkOngGNUfO8eqJpRsd4edZm3NE6LabpBzTkYMOnhm', 'CLIENT'),
-       ('c@c.com', '$2a$10$7m/yHcKoja46YkOngGNUfO8eqJpRsd4edZm3NE6LabpBzTkYMOnhm', 'VENDEUR'),
-       ('d@d.com', '$2a$10$7m/yHcKoja46YkOngGNUfO8eqJpRsd4edZm3NE6LabpBzTkYMOnhm', 'VENDEUR');
-
+VALUES ('a@a.com', '$2a$10$uNJijirLSWel8ndVZyo19e3tHweXymwBLoxTUQ1gsqOFmyQtsHKvW', 'VENDEUR'),
+       ('b@b.com', '$2a$10$uNJijirLSWel8ndVZyo19e3tHweXymwBLoxTUQ1gsqOFmyQtsHKvW', 'CLIENT'),
+       ('c@c.com', '$2a$10$uNJijirLSWel8ndVZyo19e3tHweXymwBLoxTUQ1gsqOFmyQtsHKvW', 'VENDEUR'),
+       ('d@d.com', '$2a$10$uNJijirLSWel8ndVZyo19e3tHweXymwBLoxTUQ1gsqOFmyQtsHKvW', 'VENDEUR');
 
 INSERT INTO vendeur(id, salaire, chef)
 VALUES (1, 2000, 0),
-       (3, 3000, 1);
+       (3, 3000, 1),
+       (4, 2500, 0);
 
 INSERT INTO client(id, numero)
-VALUES (2, "EZ1FD53EZF1");
+VALUES (2, 'EZ1FD53EZF13EZ51');
 
 INSERT INTO etat (id, nom)
 VALUES (1, 'neuf'),
@@ -29,25 +29,26 @@ VALUES (1, 'Promo', '#77FF77'),
 
 INSERT INTO product (id, nom, code_article, description, prix, etat_id, createur_id)
 VALUES (1, 'Asus Zenbook A14', 'aza14', 'Ordinateur portable léger avec processeur Snapdragon X Elite', 1299.99, 1, 1),
-       (2, 'MSI Vision X AI 2nd', 'msixa2', 'PC de bureau avec écran tactile vertical', 4099.99, 1, 1),
+       (2, 'MSI Vision X AI 2nd', 'msixa2', 'PC de bureau avec écran tactile vertical', 4099.99, 1, 3),
        (3, 'Lenovo Legion Go S', 'llgs', 'Console portable gaming sous SteamOS', 499.99, 1, 3),
-       (4, 'Lenovo Legion Tab Gen 3', 'lltg3', 'Tablette gaming avec Snapdragon 8 Gen 3', 499.99, 1, 3),
-       (5, 'Razer Barracuda X Chroma', 'rbxc', 'Casque gaming sans fil avec RGB', 129.99, 1, 1),
-       (6, 'HyperX Cloud Alpha', 'hca', 'Casque gaming filaire avec son surround 7.1', 99.99, 5, 3),
-       (7, 'Corsair HS55 Stereo', 'chs55', 'Casque gaming filaire abordable', 59.99, 3, 1),
-       (8, 'Razer Viper V3 Pro', 'rvv3p', 'Souris gaming sans fil ultra-légère', 159.99, 1, 3),
+       (4, 'Lenovo Legion Tab Gen 3', 'lltg3', 'Tablette gaming avec Snapdragon 8 Gen 3', 499.99, 1, 1),
+       (5, 'Razer Barracuda X Chroma', 'rbxc', 'Casque gaming sans fil avec RGB', 129.99, 1, 3),
+       (6, 'HyperX Cloud Alpha', 'hca', 'Casque gaming filaire avec son surround 7.1', 99.99, 5, 1),
+       (7, 'Corsair HS55 Stereo', 'chs55', 'Casque gaming filaire abordable', 59.99, 3, 3),
+       (8, 'Razer Viper V3 Pro', 'rvv3p', 'Souris gaming sans fil ultra-légère', 159.99, 1, 1),
        (9, 'Logitech G Pro X Superlight 2', 'lgpxs2', 'Souris gaming sans fil pour FPS', 159.99, 1, 3),
-       (10, 'Lamzu Maya X', 'lmx', 'Souris gaming sans fil avec taux de sondage 8000 Hz', 89.99, 5, 3),
+       (10, 'Lamzu Maya X', 'lmx', 'Souris gaming sans fil avec taux de sondage 8000 Hz', 89.99, 5, 1),
        (11, 'Razer BlackShark V2 Pro', 'rbsv2p', 'Casque gaming sans fil haut de gamme', 199.99, 1, 3),
-       (12, 'SteelSeries Arctis Nova 7 Wireless', 'sanv7w', 'Casque gaming sans fil multiplateforme', 179.99, 4, 1),
+       (12, 'SteelSeries Arctis Nova 7 Wireless', 'sanv7w', 'Casque gaming sans fil multiplateforme', 179.99, 4, 3),
        (13, 'Sony INZONE H5', 'sih5', 'Casque gaming sans fil pour PC et PS5', 149.99, 1, 3),
-       (14, 'Razer DeathAdder V3 Pro', 'rdav3p', 'Souris gaming ergonomique sans fil', 149.99, 5, 1),
+       (14, 'Razer DeathAdder V3 Pro', 'rdav3p', 'Souris gaming ergonameique sans fil', 149.99, 5, 1),
        (15, 'Corsair Katar Pro XT', 'ckpxt', 'Souris gaming filaire abordable', 29.99, 2, 1),
-       (16, 'HP ZBook Ultra G1a', 'hzug1a', 'Station de travail portable puissante', 2499.99, 1, 3),
+       (16, 'HP ZBook Ultra G1a', 'hzug1a', 'Station de travail portable puissante', 2499.99, 1, 1),
        (17, 'Lenovo ThinkPad X9 Aura Edition', 'ltx9ae', 'Ultrabook premium avec écran OLED', 1999.99, 1, 3),
        (18, 'Turtle Beach Stealth Pro', 'tbsp', 'Casque gaming sans fil avec ANC', 329.99, 1, 3),
        (19, 'Astro A50 X', 'aa50x', 'Casque gaming sans fil haut de gamme multiplateforme', 379.99, 4, 3),
-       (20, 'Redragon M686 Vampire', 'rm686v', 'Souris gaming sans fil abordable', 39.99, 3, 1);
+       (20, 'Redragon M686 Vampire', 'rm686v', 'Souris gaming sans fil abordable', 39.99, 3, 3);
+
 
 INSERT INTO etiquette_product (product_id, etiquette_id)
 VALUES (1, 1),  -- Asus Zenbook A14 - Promo
@@ -78,9 +79,12 @@ INSERT INTO ligne_commande (commande_id, quantite, prix_vente, product_id)
 VALUES (1, 2, 1500, 4);
 
 INSERT INTO type_promotion (name, pourcentage)
-VALUES ('solde', 1);
+VALUES ('solde', TRUE);
+
 
 INSERT INTO promotion (product_id, type_promotion_id, valeur)
 VALUES (2, 1, 20);
 
-
+INSERT INTO notification (message, auteur_id, destinataire_id)
+VALUES ('coucou 1', 1, 2),
+       ('coucou 2', 2, 1);

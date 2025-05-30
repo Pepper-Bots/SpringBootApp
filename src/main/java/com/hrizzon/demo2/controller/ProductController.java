@@ -1,5 +1,6 @@
 package com.hrizzon.demo2.controller;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import com.hrizzon.demo2.annotation.ValidFile;
 import com.hrizzon.demo2.dao.ProductDao;
 import com.hrizzon.demo2.model.Etat;
@@ -10,6 +11,7 @@ import com.hrizzon.demo2.security.ISecuriteUtils;
 import com.hrizzon.demo2.security.IsClient;
 import com.hrizzon.demo2.security.IsVendeur;
 import com.hrizzon.demo2.service.FichierService;
+import com.hrizzon.demo2.view.AffichageProductPourClient;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -63,6 +65,7 @@ public class ProductController {
 
     @GetMapping("/products")
     @IsClient
+    @JsonView(AffichageProductPourClient.class)
     public List<Product> getAll() {
 
 
