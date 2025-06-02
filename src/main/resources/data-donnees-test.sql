@@ -85,6 +85,6 @@ VALUES ('solde', TRUE);
 INSERT INTO promotion (product_id, type_promotion_id, valeur)
 VALUES (2, 1, 20);
 
-INSERT INTO notification (message, auteur_id, destinataire_id)
-VALUES ('coucou 1', 1, 2),
-       ('coucou 2', 2, 1);
+INSERT INTO notification (id, message, auteur_id, destinataire_id)
+VALUES (1, 'coucou 1', 1, 2),
+       (2, 'coucou 2', 2, 1);

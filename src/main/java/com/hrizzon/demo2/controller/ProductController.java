@@ -12,6 +12,7 @@ import com.hrizzon.demo2.security.IsClient;
 import com.hrizzon.demo2.security.IsVendeur;
 import com.hrizzon.demo2.service.FichierService;
 import com.hrizzon.demo2.view.AffichageProductPourClient;
+import com.hrizzon.demo2.view.AffichageProductPourVendeur;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -51,8 +52,8 @@ public class ProductController {
     }
 
     @GetMapping("/product/image/{id}")
-//    @IsAdmin
     @IsClient
+    @JsonView(AffichageProductPourClient.class)
     public ResponseEntity<Product> get(@PathVariable int id) {
 
         Optional<Product> optionalProduct = productDao.findById(id);
@@ -120,6 +121,7 @@ public class ProductController {
 
     @DeleteMapping("/product/{id}")
     @IsVendeur
+    @JsonView(AffichageProductPourVendeur.class)
     public ResponseEntity<Product> delete(
             @PathVariable int id,
             @AuthenticationPrincipal AppUserDetails userDetails
@@ -158,6 +160,7 @@ public class ProductController {
 
     @PutMapping("/product/{id}")
     @IsVendeur
+    @JsonView(AffichageProductPourVendeur.class)
     public ResponseEntity<Product> update(
             @PathVariable int id,
             @RequestBody @Valid Product productAsauvegarder) {
@@ -181,6 +184,7 @@ public class ProductController {
 
     @GetMapping("/product/image/{idProduct}")
     @IsClient
+    @JsonView(AffichageProductPourClient.class)
     public ResponseEntity<byte[]> getImageProduct(@PathVariable int idProduct) {
 
         Optional<Product> optional = productDao.findById(idProduct);
