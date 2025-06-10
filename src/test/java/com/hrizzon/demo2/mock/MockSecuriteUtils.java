@@ -4,10 +4,16 @@ import com.hrizzon.demo2.security.AppUserDetails;
 import com.hrizzon.demo2.security.ISecuriteUtils;
 
 public class MockSecuriteUtils implements ISecuriteUtils {
+
+    private String role;
+
+    public MockSecuriteUtils(String role) {
+        this.role = role;
+    }
+
     @Override
     public String getRole(AppUserDetails userDetails) {
-
-        return "VENDEUR";
+        return role;
     }
 
     @Override
@@ -19,4 +25,5 @@ public class MockSecuriteUtils implements ISecuriteUtils {
     public String getSubjectFromJwt(String jwt) {
         return "";
     }
+
 }
