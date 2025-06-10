@@ -18,12 +18,13 @@ import java.io.IOException;
 @Component
 public class JwtFilter extends OncePerRequestFilter {
 
+    private final ISecurityUtils securityUtlis;
     protected ISecurityUtils securityUtils;
     protected UserDetailsService userDetailsService;
 
     @Autowired
-    public JwtFilter(JwUtils securityUtlis, UserDetailsService userDetailsService) {
-        this.securityUtlis = securityUtlis;
+    public JwtFilter(ISecurityUtils securityUtils, UserDetailsService userDetailsService) {
+        this.securityUtlis = securityUtils;
         this.userDetailsService = userDetailsService;
     }
 
